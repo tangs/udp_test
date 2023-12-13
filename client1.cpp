@@ -26,6 +26,7 @@ void echo_ser(int sockfd, struct sockaddr* addr, socklen_t *len)
 {
     printf("start recv B data...\n");
     char buf[1024];
+    int idx = 0;
     while(1)
     {
         bzero(buf, sizeof(buf));
