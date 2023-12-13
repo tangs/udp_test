@@ -25,12 +25,14 @@ typedef struct{
 void echo_ser(int sockfd, struct sockaddr* addr, socklen_t *len)
 {
     char buf[1024];
+    int idx = 0;
     while(1)
     {
         bzero(buf, sizeof(buf));
         printf(">> ");
         fflush(stdout);
-        fgets(buf, sizeof(buf)-1, stdin);
+//        fgets(buf, sizeof(buf)-1, stdin);
+        snprintf(buf, sizeof(buf), "from client 2, idx: %d", idx++);
         //向A发送数据
         sendto(sockfd, buf, strlen(buf), 0, addr, sizeof(struct sockaddr_in));
 
@@ -42,6 +44,7 @@ void echo_ser(int sockfd, struct sockaddr* addr, socklen_t *len)
         buf[strlen(buf)] = '\0';
         if(strcmp(buf, "exit") == 0)
             break;
+        sleep(1);
     }
 }
 
